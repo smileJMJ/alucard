@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="resources/css/reset.css">
+    <link rel="stylesheet" href="resources/css/font.css">
+    <script type="text/javascript" src="resources/js/Alucard.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+</head>
+
+<body>
+	<script type="text/javascript" src="resources/js/slick.min.js"></script>
+  <script type="text/javascript">
+  	var gnbData = [
+  		{name: 'inAIR 소개', url: 'https://www.midashri.com/intro/ai'},
+  		{name: '성공스토리', url: 'https://www.midashri.com/story/list'},
+  		{name: '체험하기', url: 'https://www.midashri.com/experience'},
+  		{name: '문의하기', url: 'https://www.midashri.com/contact/contact'},
+  		{name: 'HR 세미나', url: 'https://www.midashri.com/seminar/list'},
+  		{name: 'HRev 블로그', url: 'https://www.midashri.com/blog'}
+  	];
+
+  	var slideData = [
+  		{html: 'SPC, 단순 업무는 줄이고<strong>인재에 집중하고 있습니다</strong>', img:'resources/img/visual1.jpg', url:'#'},
+  		{html: '쌍용자동차, 1만명의 지원자<strong>단 2명의 담당자가 관리해요</strong>', img:'resources/img/visual2.jpg', url:'#'}
+  	];
+
+  	var filterData = {
+  		job: ['업종', '제조', '제약', '유통', '기관'],
+  		company: ['기업 구분', '대기업/계열사', '중견/중소기업', '공기업/공공기관', '외국계']
+  	};
+
+  	var listData = [
+  		{name: "셀트리온", tit: "셀트리온헬스케어가<br/>잘 나가는 이유!", thumb: "resources/img/thumb1.jpg", logo: "resources/img/logo_celltrion.png", job: filterData.job[0], company: filterData.company[0]},
+  		{name: "SPC", tit: "대규모 그룹 공채<br/>inAIR 하나면 충분해요", thumb: "resources/img/thumb2.jpg", logo: "resources/img/logo_spc.png", job: filterData.job[1], company: filterData.company[1]},
+  		{name: "셀트리온", tit: "셀트리온헬스케어가<br/>잘 나가는 이유!", thumb: "resources/img/thumb1.jpg", logo: "resources/img/logo_celltrion.png", job: filterData.job[2], company: filterData.company[2]},
+  		{name: "SPC", tit: "대규모 그룹 공채<br/>inAIR 하나면 충분해요", thumb: "resources/img/thumb2.jpg", logo: "resources/img/logo_spc.png", job: filterData.job[3], company: filterData.company[3]},
+  		{name: "셀트리온", tit: "셀트리온헬스케어가<br/>잘 나가는 이유!", thumb: "resources/img/thumb1.jpg", logo: "resources/img/logo_celltrion.png", job: filterData.job[4], company: filterData.company[4]},
+  		{name: "SPC", tit: "대규모 그룹 공채<br/>inAIR 하나면 충분해요", thumb: "resources/img/thumb2.jpg", logo: "resources/img/logo_spc.png", job: filterData.job[1], company: filterData.company[1]}
+  	];
+
+	  Alucard(function(){
+	  	var wrap,
+	  			inner,
+	  			header,
+	  			container,
+	  			footer,
+	  			visualSlide,
+	  			filterArea,
+	  			listArea,
+	  			styleSelectFunc,				// 변수 초기화 & 값, 함수등 선언을 한곳에 똑같이??
+	  			listHoverFunc;					// list hover motion
+
+	  	/*---------------------- Markup & Event Code  ------------------------------------*/
+	  	// 공통 레이아웃
+	  	wrap = Alucard.Dom('div').S(
+	  		'@id', 'wrap',
+	  		'<', 'body'
+  		);
+
+  		inner = Alucard.Dom('div').S('@class', 'inner');
+
+	  	header = Alucard.Dom('header').S(
+	  		'@id', 'header',
+	  		'<', wrap,
+	  		'>', Alucard.Dom('div').S(
+	  			'@className', 'inner',
+	  			'>', Alucard.Dom('h1').S(
+	  				'>', Alucard.Dom('a').S('@href', '/')
+	  			),
+	  			'>', Alucard.Dom('nav').S(
+	  				'@id', 'gnb',
+	  				'>', (function(){							// li, a 다 dom으로 만들어서 처리
+  						var ul = Alucard.Dom('ul'),
+  								gnbLng = gnbData.length;
+  								
+  						for(var i=0; i<gnbLng; i++){
+  							Alucard.Dom('li').S(
+  								'over', function(e){
+  									this.dom.className = "on";
+  								},
+  								'out', function(e){
+  									this.dom.className = "";
+  								},
+  								'>', Alucard.Dom('a').S(
+  									'@href', gnbData[i].url,
+  									'>', Alucard.Dom('strong').S(
+  										'html', gnbData[i].name
+  									)
+  								),
+  								'<', ul
+  							)
+  						}
+  						return ul;
+  					})()
+  					/*'>', Alucard.Dom('ul').S(					// li, a 를 html 태그로 만들어 넣음
+  						'html', (function(){
+  							var	html = "",
+  									gnbLng = gnbData.length;
+
+  							for(var i=0; i<gnbLng; i++){
+  								html += '<li><a href="'+gnbData[i].url+'">'+gnbData[i].name+'</a></li>';
+  							}
+  							return html;
+  						})()
+  					)*/
+	  			),
+	  			'>', Alucard.Dom('span').S(
+	  				'@className', 'question',
+	  				'>', Alucard.Dom('a').S(
+	  					'@href', '/consultant/contact',
+	  					'>', Alucard.Dom('strong').S('html', 'inAIR 문의하기')
+	  				)
+	  			)
+	  		)
+	  	);
+
+
+	  	container = Alucard.Dom('div').S(
+	  		'@id', 'container',
+	  		'<', wrap
+	  	);
+
+	  	footer = Alucard.Dom('footer').S(
+	  		'@id', 'footer',
+	  		'<', wrap
+	  	);
+
+	  	// 콘텐츠 
+	  	visualSlide = Alucard.Dom('div').S(
+	  		'@className', 'subvisual_area',
+	  		'>', (function(){
+	  			var ul = Alucard.Dom('ul').S('@className', 'subvisual_slides'),
+	  					slideLng = slideData.length;
+
+	  			for(var i=0; i<slideLng; i++){
+	  				Alucard.Dom('li').S(
+	  					'@className', 'slides_item',
+	  					'>', Alucard.Dom('div').S(
+	  						'@className', 'title_area',
+	  						'>', Alucard.Dom('div').S(
+	  							'@className', 'title_area_in',
+	  							'>', Alucard.Dom('p').S('@className', 'eng', 'html', 'SUCCESS STORY'),
+		  						'>', Alucard.Dom('dl').S(
+	  								'>', Alucard.Dom('dt').S('html', slideData[i].html),
+	  								'>', Alucard.Dom('dd').S(
+	  									'>', Alucard.Dom('a').S(
+	  										'@href', slideData[i].url,
+	  										'html', '전체 스토리 보기'
+	  									)
+	  								)
+	  							)
+	  						)
+	  					),
+	  					'background-image', 'url('+slideData[i].img+')',
+	  					'<', ul
+	  				);
+	  			}
+
+	  			return ul;
+	  		})(),
+	  		'<', container
+	  	);
+
+	  	filterArea = Alucard.Dom('div').S(
+	  		'@className', 'filter_area',
+	  		'>', Alucard.Dom('div').S(
+	  			'@className', 'inner',
+	  			'>', Alucard.Dom('div').S(
+		  			'@id', 'filter1',
+		  			'@className', 'style_select',
+		  			'>', Alucard.Dom('dl').S(
+		  				'>', Alucard.Dom('dt').S(
+		  					'>', Alucard.Dom('a').S('@href', '#', 'html', filterData.job[0], 
+		  						'click', function(e){
+		  						e.nativeEvent.preventDefault();			// preventDefault는 nativeEvent에서 찾기
+		  						styleSelectFunc(this);
+		  					},'focusout', function(e){
+		  						styleSelectFunc(this);
+		  					})
+		  				),
+		  				'>', Alucard.Dom('dd').S(
+		  					'>', (function(){
+		  						var ul = Alucard.Dom('ul'),
+		  								job = filterData.job,
+		  								jobLng = filterData.job.length;
+		  						
+		  						for(var i=0; i<jobLng; i++){
+		  							Alucard.Dom('li').S(
+		  								'>', (function(){
+		  									var a = Alucard.Dom('a'),
+		  											value = (i===0) ? 'all' : filterData.job[i];
+		  									a.S('@href', '#', '@data-value', value, 'html', filterData.job[i]);
+
+		  									return a;
+		  								})(),
+		  								'<', ul
+		  							);
+		  						}
+
+		  						return ul;
+		  					})()
+		  				)
+		  			)
+		  		),
+		  		'>', Alucard.Dom('div').S(
+		  			'@id', 'filter2',
+		  			'@className', 'style_select',
+		  			'>', Alucard.Dom('dl').S(
+		  				'>', Alucard.Dom('dt').S(
+		  					'>', Alucard.Dom('a').S('@href', '#', 'html', filterData.company[0], 
+		  						'click', function(e){
+		  						e.nativeEvent.preventDefault();
+		  						styleSelectFunc(this);
+		  					}, 'focusout', function(e){
+		  						styleSelectFunc(this);
+		  					})
+		  				),
+		  				'>', Alucard.Dom('dd').S(
+		  					'>', (function(){
+		  						var ul = Alucard.Dom('ul'),
+		  								company = filterData.company,
+		  								companyLng = filterData.company.length;
+		  						
+		  						for(var i=0; i<companyLng; i++){
+		  							Alucard.Dom('li').S(
+		  								'>', (function(){
+		  									var a = Alucard.Dom('a'),
+		  											value = (i===0) ? 'all' : filterData.company[i];
+		  									a.S('@href', '#', '@data-value', value, 'html', filterData.company[i]);
+
+		  									return a;
+		  								})(),
+		  								'<', ul
+		  							);
+		  						}
+
+		  						return ul;
+		  					})()
+		  				)
+		  			)
+		  		),
+		  		'>', Alucard.Dom('div').S(
+		  			'@className', 'search-container',
+		  			'>', Alucard.Dom('button').S('@type', 'button', '@className', 'btn_search'),
+		  			'>', Alucard.Dom('input').S('@type', 'text', '@id', 'quicksearch', '@className', 'text-search', '@placeholder', '기업명을 검색해보세요')
+		  		),
+	  		),
+	  		'<', container
+	  	);
+
+	  	listArea = Alucard.Dom('div').S(
+	  		'@className', 'list_area',
+	  		'>', Alucard.Dom('div').S(
+	  			'@className', 'inner',
+	  			'>', (function(){
+	  				var ul = Alucard.Dom('ul'),
+	  						listLng = listData.length;
+
+		  				for(var i=0; i<listLng; i++){
+		  					Alucard.Dom('li').S(
+		  						'@data-job', listData[i].job,
+		  						'@data-company', listData[i].company,
+		  						'@data-keyword', listData[i].name,
+		  						'>', Alucard.Dom('div').S(
+	  								'@className', 'thumb',
+	  								'>', Alucard.Dom('a').S(
+	  									'@href', '#',
+	  									'@className', 'link',
+	  									'>', Alucard.Dom('i')
+	  								),
+	  								'>', Alucard.Dom('figure').S(
+	  									'background-image', 'url('+listData[i].thumb+')'
+	  								),
+	  								'>', Alucard.Dom('span').S('@className', 'mask')
+	  							),
+	  							'>', Alucard.Dom('div').S(
+	  								'@className', 'description',
+	  								'>', Alucard.Dom('a').S(
+	  									'@href', '#',
+	  									'@className', 'link',
+	  									'>', Alucard.Dom('div').S(
+	  										'@className', 'logo',
+	  										'>', Alucard.Dom('p').S(
+	  											'>', Alucard.Dom('img').S(
+	  												'@src', listData[i].logo
+	  											)
+	  										)
+	  									),
+	  									'>', Alucard.Dom('div').S(
+	  										'@className', 'list_text',
+	  										'>', Alucard.Dom('p').S(
+	  											'html', listData[i].tit
+	  										)
+	  									)
+	  								),
+	  								'>', Alucard.Dom('div').S(
+	  									'@className', 'hashtag',
+	  									'>', Alucard.Dom('ul').S(
+	  										'>', Alucard.Dom('li').S(
+	  											'>', Alucard.Dom('a').S('@href', '#', '@data-tag', listData[i].job, 'html', '#'+listData[i].job)
+	  										),
+	  										'>', Alucard.Dom('li').S(
+	  											'>', Alucard.Dom('a').S('@href', '#', '@data-tag', listData[i].company, 'html', '#'+listData[i].company)
+	  										)
+	  									)
+	  								)
+	  							),
+		  						'<', ul
+		  					);
+		  				}
+
+		  				return ul;
+		  			})(),
+	  			),
+	  			'<', container
+	  		);
+
+
+	  	/*---------------------- Style Code  ------------------------------------*/
+	  	Alucard.Css('.inner').S('position', 'relative','width', 1080, 'margin', '0 auto');
+	  	Alucard.Css('#header').S('position', 'fixed', 'left', 0, 'top', 0, 'z-index', 500, 'width', '100%', 'height', 60, 'background', '#fff');
+	  	Alucard.Css('#header h1').S('position', 'absolute', 'left', 0, 'top', 22);
+	  	Alucard.Css('#header h1 a').S('display', 'block', 'width', 47, 'height', 15, 'background-image', 'url(resources/img/inAIR_black.svg)', 'background-repeat', 'no-repeat', 'background-position', 'left top');
+	  	Alucard.Css('#gnb').S('display', 'block', 'margin-left', 130);
+	  	Alucard.Css('#gnb ul').S('overflow', 'hidden');
+	  	Alucard.Css('#gnb ul li').S('float', 'left');
+
+	  	/*Alucard.Css('#gnb ul li:nth-child(1)').S('width', 115);
+	  	Alucard.Css('#gnb ul li:nth-child(2)').S('width', 117);
+	  	Alucard.Css('#gnb ul li:nth-child(3)').S('width', 104);
+	  	Alucard.Css('#gnb ul li:nth-child(4)').S('width', 104);
+	  	Alucard.Css('#gnb ul li:nth-child(5)').S('width', 114);
+	  	Alucard.Css('#gnb ul li:nth-child(6)').S('width', 130);*/
+	  	gnbLiStyle();				// gnb li 스타일 반복문으로
+
+	  	function gnbLiStyle(){
+	  		var gnbLiW = [115,117,104,104,114,130];
+	  		var li = Alucard.queryAll('#gnb li').forEach(function(v, i){
+	  			//v.style.width = gnbLiW[i] + 'px';
+	  			//Alucard.Dom(v.dom).S('width', gnbLiW[i])
+	  			Alucard.Css('#gnb li:nth-child('+i+')').S('width', gnbLiW[i]);
+	  		});
+	  	}
+
+	  	Alucard.Css('#gnb ul li a').S('display', 'block', 'padding-top', 17, 'margin-top', 5, 'font-family', 'NotoSanskr_Regular', 'font-size', 15, 'text-align', 'center', 'line-height', '1', 'transition', 'all .3s ease-out');
+	  	Alucard.Css('#gnb ul li a strong').S('display', 'inline-block', 'position', 'relative', 'padding-bottom', 23);
+	  	Alucard.Css('#gnb ul li a strong::before').S('display', 'block', 'content', '""', 'position', 'absolute', 'left', '50%', 'bottom', 0, 'z-index', 5, 'width', 0, 'height', 2, 'background', '#1b2855', 'transition', 'width ease-out .3s');
+	  	Alucard.Css('#gnb ul li a strong::after').S('display', 'block', 'content', '""', 'position', 'absolute', 'right', '50%', 'bottom', 0, 'z-index', 5, 'width', 0, 'height', 2, 'background', '#1b2855', 'transition', 'width ease-out .3s');
+	  	Alucard.Css('#gnb ul li.on a strong::before').S('width', '50%');
+	  	Alucard.Css('#gnb ul li.on a strong::after').S('width', '50%');
+
+	  	Alucard.Css('#header .question').S('position', 'absolute', 'right', 0, 'top', 0, 'width', 165, 'height', 60, 'border-left', '1px solid #dadada', 'border-right', '1px solid #dadada');
+	  	Alucard.Css('#header .question a').S('display', 'block', 'font-family', 'NotoSanskr_Medium', 'font-size', 13, 'color', '#272727', 'text-align', 'center', 'line-height', 60);
+	  	Alucard.Css('#header .question a strong').S('display', 'inline-block', 'position', 'relative', 'padding-left', 21, 'transition', 'all .3s cubic-bezier(.28,.72,.40,.88)');
+	  	Alucard.Css('#header .question a strong::before').S('display', 'inline-block', 'content', '"\\e802"', 'position', 'absolute', 'left', 0, 'top', 0, 'font-family', 'Linearicons-Free', 'vertical-align', 'top', 'transition', 'all .2s');
+	  	Alucard.Css('#header .question a strong::after').S('display', 'inline-block', 'content', '"\\e87a"', 'opacity', 0, 'position', 'absolute', 'right', 0, 'top', 0, 'font-family', 'Linearicons-Free', 'vertical-align', 'middle', 'transition', 'all .2s');
+	  	Alucard.Css('#header .question a:hover strong').S('padding-left', 0, 'padding-right', 25);
+	  	Alucard.Css('#header .question a:hover strong::before').S('margin-left', -10, 'opacity', 0);
+	  	Alucard.Css('#header .question a:hover strong::after').S('opacity', 1);
+
+	  	Alucard.Css('#container').S('padding-top', 60);
+	  	Alucard.Css('.subvisual_area').S('overflow', 'hidden', 'width', '100%', 'height', 550);
+	  	Alucard.Css('.subvisual_area .subvisual_slides').S('overflow', 'hidden', 'position', 'relative', 'width', '100%', 'height', '100%', 'margin', 0);
+	  	Alucard.Css('.subvisual_area .slides_item').S('overflow', 'hidden', 'height', 550, 'margin-left', 0, 'background-repeat', 'no-repeat', 'background-position', 'center center', 'background-size', 'cover');
+	  	Alucard.Css('.subvisual_area .slides_item::before').S('display', 'block', 'content', '""', 'position', 'absolute', 'left', 0, 'top', 0, 'width', '100%', 'height', '100%', 'background', 'rgba(0,0,0,0.7)')
+	  	Alucard.Css('.subvisual_slides .slides_item .title_area').S('display', 'table', 'position', 'relative', 'z-index', 0, 'width', 1080, 'height', '100%', 'margin', '0 auto');
+			Alucard.Css('.subvisual_area .slides_item .title_area .title_area_in').S('display', 'table-cell', 'width', '100%', 'height', '100%', 'vertical-align', 'middle');
+			Alucard.Css('.subvisual_area .slides_item .title_area .eng').S('padding-left', 3, 'font-family', 'Montserrat_SemiBold', 'font-size', '1rem', 'color', '#fff', 'letter-spacing', 1.2);
+			Alucard.Css('.subvisual_area .slides_item .title_area dl').S('margin-top', '2.5rem');
+			Alucard.Css('.subvisual_area .slides_item .title_area dl dt').S('font-family', 'NanumSquare', 'font-size', '3.125rem', 'color', '#fff', 'line-height', '1.4');
+			Alucard.Css('.subvisual_area .slides_item .title_area dl dt strong').S('display', 'block', 'font-family', 'NanumSquareB');
+			Alucard.Css('.subvisual_area .slides_item .title_area dl dd').S('margin-top', '3.125rem');
+			Alucard.Css('.subvisual_area .slides_item .title_area dl dd a').S('display', 'block', 'width', 235, 'height', 50, 'padding', 0, 'font-family', 'NotoSanskr_Regular', 'font-size', '0.938rem', 'color', '#fff', 'text-align', 'center', 'line-height', 48, 'background', 'rgba(255,255,255,0.2)', 'border', '1px solid #fff', 'transition', 'all .25s ease-out');
+			Alucard.Css('.subvisual_area .slides_item .title_area dl dd a:hover').S('background', 'rgba(255,255,255,0.35)');
+			Alucard.Css('.subvisual_area .slick-dots').S('position', 'absolute', 'left', 0, 'bottom', '3.75rem', 'z-index', 10, 'width', '100%', 'margin', 0, 'text-align', 'center');
+			Alucard.Css('.subvisual_area .slick-dots li').S('display', 'inline-block', 'margin-right', 12, 'margin-left', 0);
+			Alucard.Css('.subvisual_area .slick-dots li button').S('position', 'relative', 'width', 12, 'height', 12, 'padding', 0, 'text-indent', '-9999em', 'vertical-align', 'middle', 'background', 'rgba(255,255,255,0.3)', 'border', 0, 'border-radius', '50%', 'transition', 'all .2s');
+			Alucard.Css('.subvisual_area .slick-dots li.slick-active button').S('background', 'rgba(255,255,255, 1)');
+
+			Alucard.Css('.filter_area').S('padding', '20px 0', 'transition', 'all .3s cubic-bezier(0.4,0.77,0.6,0.88)');
+			Alucard.Css('.filter_area::after').S('display', 'block', 'content', '""', 'clear', 'both');
+			Alucard.Css('.style_select').S('position', 'relative', 'float', 'left', 'width', '31.62%');
+			Alucard.Css('.style_select#filter2').S('margin-left', '2.56%');
+			Alucard.Css('.style_select dt').S('height', 46);
+			Alucard.Css('.style_select dt a').S('display', 'block', 'position', 'relative', 'height', '100%', 'padding', '0 25px', 'font-family', 'NotoSanskr_Regular', 'font-size', '0.937rem', 'color', '#000', 'line-height', 44, 'background', '#f5f7fa', 'border', '1px solid #f5f7fa', 'transition', 'all .3s ease-out');
+			Alucard.Css('.style_select dt a::after').S('display', 'block', 'content', '"\\e874"', 'position', 'absolute', 'right', 19, 'top', 0, 'font-family', 'Linearicons-Free', 'font-weight', 'bold', 'line-height', 46, 'transition', 'all .3s cubic-bezier(0.4,0.77,0.6,0.88)');
+			Alucard.Css('.style_select dl dd').S('display', 'none', 'overflow', 'hidden', 'position', 'absolute', 'left', 0, 'top', 46, 'z-index', 100, 'width', '100%', 'height', 0, 'border', '1px solid #e3e3e3', 'border-top', 0, 'box-shadow', '3px 3px 10px rgba(0,0,0,0.1)');
+			Alucard.Css('.style_select dl dd ul li a').S('display', 'block', 'padding', '15px 25px', 'font-family', 'NotoSanskr_Regular', 'font-size', '0.937rem', 'color', '#000', 'background', '#fff', 'transition', 'all .2s ease-out');
+			Alucard.Css('.search-container').S('float', 'right', 'width', '31.6%', 'margin-left', '2.56%');
+			Alucard.Css('.search-container .btn_search').S('overflow', 'hidden', 'position', 'absolute', 'right', 0, 'top', 0, 'width', 37, 'height', 46, 'background', 'url(resources/img/search_icon.svg) no-repeat left center', 'background-size', '18px auto');
+			Alucard.Css('.search-container input[type="text"]#quicksearch').S('width', '100%', 'height', 46, 'padding', '10px 42px 10px 25px', 'font-family', 'NotoSanskr_Regular', 'font-size', '0.9375rem', 'color', '#999aa3', 'line-height', 20, 'background', '#f5f7fa', 'border', '1px solid #f5f7fa');
+
+			Alucard.Css('.list_area').S('padding', '4.375rem 0 4.875rem', 'background', '#f5f7fa');
+			Alucard.Css('.list_area .inner>ul').S('display', 'flex', 'flex-wrap', 'wrap', 'margin-left', '-3.1%');
+			Alucard.Css('.list_area .inner>ul>li').S('overflow', 'hidden', 'width', '31.1%', 'max-width', 336, 'margin-left', '3.1%', 'margin-bottom', '2.5rem', 'background', '#fff', 'box-shadow', '3px 0 30px rgba(0,0,0,0.1)');
+			Alucard.Css('.list_area .thumb').S('overflow', 'hidden', 'position', 'relative', 'width', '100%', 'height', 211);
+			Alucard.Css('.list_area .thumb figure').S('height', '100%', 'min-height', 211, 'background-position', 'center center', 'background-repeat', 'no-repeat', 'background-size', 'cover');
+			Alucard.Css('.list_area .thumb a').S('display', 'block', 'position', 'absolute', 'left', 0, 'top', 0, 'z-index', 10, 'width', '100%', 'height', '100%');
+			Alucard.Css('.list_area .thumb a i').S('position', 'absolute', 'left', '50%', 'top', '50%', 'width', 50, 'height', 50, 'opacity', 0, 'transform', 'translate(-50.01%,-50%)');
+			Alucard.Css('.list_area .thumb a i::before').S('display', 'block', 'content', '""', 'position', 'absolute', 'left', 0, 'top', 24, 'width', 50, 'height', 2, 'background', '#fff');
+			Alucard.Css('.list_area .thumb a i::after').S('display', 'block', 'content', '""', 'position', 'absolute', 'left', 24, 'top', 0, 'width', 2, 'height', 50, 'background', '#fff');
+			Alucard.Css('.list_area .thumb .mask').S('display', 'block', 'position', 'absolute', 'left', 0, 'top', 0, 'z-index', 5, 'width', '100%', 'height', '100%', 'background', '#000', 'opacity', 0);
+			Alucard.Css('.list_area .description').S('overflow', 'hidden', 'position', 'relative');
+			Alucard.Css('.list_area .description>a').S('display', 'block', 'width', '100%', 'height', '100%', 'min-height', 273, 'padding', '15px 8% 60px 12%');
+			Alucard.Css('.list_area .description .logo').S('display', 'table', 'overflow', 'hidden', 'height', 48, 'margin-bottom', 25, 'text-align', 'left');
+			Alucard.Css('.list_area .description .logo p').S('display', 'table-cell', 'vertical-align', 'bottom');
+			Alucard.Css('.list_area .description .logo p img').S('width', 'auto', 'max-height', 48);
+			Alucard.Css('.list_area .description .list_text').S('overflow', 'hidden', 'max-height', '6.94rem', 'font-family', 'NanumSquare', 'font-size', '1.625rem', 'color', '#000', 'line-height', '1.46');
+			Alucard.Css('.list_area .description .hashtag').S('position', 'absolute', 'left', '12%', 'bottom', 35, 'z-index', 10);
+			Alucard.Css('.list_area .description .hashtag li').S('display', 'inline-block', 'margin-right', 5);
+			Alucard.Css('.list_area .description .hashtag li a').S('position', 'relative', 'font-family', 'NotoSanskr_Regular', 'font-size', '0.875rem', 'color', '#000');
+			Alucard.Css('.list_area .description .hashtag li a::before').S('display', 'block', 'content', '""', 'position', 'absolute', 'left', '50%', 'bottom', -2, 'width', 0, 'height', 1, 'background', '#000', 'transition', 'all .3s cubic-bezier(0.4,0.77,0.6,0.88)');
+			Alucard.Css('.list_area .description .hashtag li a::after').S('display', 'block', 'content', '""', 'position', 'absolute', 'right', '50%', 'bottom', -2, 'width', 0, 'height', 1, 'background', '#000', 'transition', 'all .3s cubic-bezier(0.4,0.77,0.6,0.88)');
+			Alucard.Css('.list_area .description .hashtag li a:hover::before').S('width', '50%');
+			Alucard.Css('.list_area .description .hashtag li a:hover::after').S('width', '50%');
+
+
+
+
+
+
+	  	/*---------------------- Script Code  ------------------------------------*/
+	  	// style 코드 상단에 올리면 기능 동작하는 시간으로 인해 스타일 입혀지기 전 모습이 살짝쿵 보임..
+		 	$(Alucard.query('.subvisual_slides', true)).slick({				// slick은 selector가 $jquery 형태가 되어야 출력됨...
+		 		fade:true,
+			  slidesToShow:1,
+			  slidesToScroll:1,
+			  arrows:false,
+			  dots:true,
+			  infinite: true,
+			  autoplay:true,
+			  autoplaySpeed:3500,
+			  draggable:false,
+			  speed:600,
+			  cssEase: "ease-out",
+			  zIndex:80,
+			  pauseOnHover:false,
+			  pauseOnFocus:false
+		 	});
+
+		 	// select function
+		 	styleSelectFunc = function(el){
+		 		var ele = el.dom,
+		 				dd = ele.parentNode.nextSibling,
+		 				ul = dd.childNodes[0];
+
+		 		if(ele.className === "open"){
+		 			ele.className = "";
+		 			TweenMax.to(dd, 0.25, {height:0, ease:"Cubic.easeOut", onComplete:function(){
+		 				TweenMax.set(dd, {display:"none"});
+		 			}});
+		 		}else{
+		 			ele.className = "open";
+		 			TweenMax.set(dd, {display:"block"});
+		 			TweenMax.to(dd, 0.25, {display:"block", height:ul.clientHeight, ease:"Cubic.easeOut"});
+		 		}
+		 	};
+	  });
+
+	 	// list hover motion
+	 	listHoverFunc = function(el, type){
+	 		var ele = el.dom;
+
+	 		if(type === 'over'){
+
+	 		}else{
+
+	 		}
+	 	};
+	 	
+  </script>
+</body>
+
+</html>

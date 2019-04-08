@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <script type="text/javascript" src="Alucard.min.js"></script>
+    <style>
+    	.test {
+    		color:#fff;
+    	}
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+    Alucard(function() {
+        var test
+        test = Alucard.Dom('div').S(
+            'position', 'absolute',
+            'width', 100,
+            'height', 100,
+            'background', 'red',
+            'left', 0,
+            'top', 0,
+            '@className', 'test',
+            '>', Alucard.Dom('div').S('html', '명진아'),
+            'down',
+            function(e) {
+                console.log(e)
+            },
+            'up',
+            function(e) {
+                console.log(e)
+            },
+            'move',
+            function(e) {
+                console.log(e)
+            },
+            '<', 'body'
+        )
+
+        var root = Alucard.Dom('li').S('<', 'body')
+
+
+var tData = 
+[
+	'test1',
+	'test2',
+	'test3',
+	'test4',
+	'test5'
+]
+
+tData2 = {
+	a : tData,
+	b : 'test'
+}
+
+
+var parser = function(data){
+
+	console.log(typeof data)
+
+}
+parser(tData2)
+
+
+
+
+        var i = tData.length
+        var tRoot;
+        var temp;
+        tRoot = root
+        while (i--) {
+        		if(i%10==0 && i!=0) {
+        			tRoot = Alucard.Dom('li').S('html','와하하하하ㅏ하하','<',tRoot)
+        			console.log('걸렸다',tRoot)
+        		}
+            temp =Alucard.Dom('li').S(
+            	'@className',tData[i],
+                'html', i,
+                '<', tRoot
+                )
+        }
+
+        	Alucard.Css('.test').S(
+        		'background',Alucard.DETECT.browser == 'ie' ? 'blue':'red'
+        		)
+
+
+
+        Alucard.LOOP.add('render', function() {
+            if (Alucard.KEY.downList['a']) test.S('left', test.S('left') - 1)
+            if (Alucard.KEY.downList['d']) test.S('left', test.S('left') + 1)
+            if (Alucard.KEY.downList['w']) test.S('top', test.S('top') - 1)
+            if (Alucard.KEY.downList['s']) test.S('top', test.S('top') + 1)
+        })
+    })
+    </script>
+</body>
+
+</html>
