@@ -2,6 +2,25 @@ var header = (function(){
     var headerDom = Alucard.Dom('header'),
         inner, h1, gnb, span;
 
+    var option = {
+        gnbType: "",
+        gnbData: []
+    };
+
+    var init = function(gnbData){
+        inner = Alucard.Dom('div').S(
+            '@className', 'inner',
+            '>', h1.init(), '>', gnb.init(gnbData), '>', span.init());
+
+
+        headerDom.S(
+            '@id', 'header',
+            '>', inner
+        );
+
+        return headerDom;
+    };
+
 
     h1 = {
         init: function(){
@@ -21,44 +40,47 @@ var header = (function(){
     };
 
     gnb = {
-        init: function(){
+        init: function(data){
             var _ = this;
 
             _.css();
-            return _.dom;
+            return _.dom(data);
         },
-        dom:Alucard.Dom('nav').S(
-            '@id', 'gnb',
-            '>', (function(){							// li, a 다 dom으로 만들어서 처리
-                var ul = Alucard.Dom('ul'),
-                    gnbLng = gnbData.length;
+        dom:function(gnbData){
+            var gnbDom = Alucard.Dom('nav');
+            gnbDom.S(
+                '@id', 'gnb',
+                '>', (function(){							// li, a 다 dom으로 만들어서 처리
+                    var ul = Alucard.Dom('ul'),
+                        gnbLng = gnbData.length;
 
-                for(var i=0; i<gnbLng; i++){
-                    Alucard.Dom('li').S(
-                        'over', function(e){
-                            this.dom.className = "on";
-                        },
-                        'out', function(e){
-                            this.dom.className = "";
-                        },
-                        '>', Alucard.Dom('a').S(
-                            '@href', gnbData[i].url,
-                            '>', Alucard.Dom('strong').S(
-                                'html', gnbData[i].name
-                            )
-                        ),
-                        '<', ul
-                    )
-                }
-                return ul;
-            })()
-        ),
+                    for(var i=0; i<gnbLng; i++){
+                        Alucard.Dom('li').S(
+                            'over', function(e){
+                                this.dom.className = "on";
+                            },
+                            'out', function(e){
+                                this.dom.className = "";
+                            },
+                            '>', Alucard.Dom('a').S(
+                                '@href', gnbData[i].url,
+                                '>', Alucard.Dom('strong').S(
+                                    'html', gnbData[i].name
+                                )
+                            ),
+                            '<', ul
+                        )
+                    }
+                    return ul;
+                })()
+            );
+            return gnbDom;
+        },
         css: function(){
             Alucard.Css('#gnb').S('display', 'block', 'margin-left', 130);
             Alucard.Css('#gnb ul').S('overflow', 'hidden');
             Alucard.Css('#gnb ul li').S('float', 'left');
 
-            var gnbLiW = [115,117,104,104,114,130];
             Alucard.Css('#gnb li:nth-child(1)').S('width', 115);
             Alucard.Css('#gnb li:nth-child(2)').S('width', 117);
             Alucard.Css('#gnb li:nth-child(3)').S('width', 104);
@@ -101,15 +123,5 @@ var header = (function(){
         }
     };
 
-    inner = Alucard.Dom('div').S(
-        '@className', 'inner',
-        '>', h1.init(), '>', gnb.init(), '>', span.init());
-
-
-    headerDom.S(
-        '@id', 'header',
-        '>', inner
-    );
-
-    return headerDom;
+    return init;
 })();
