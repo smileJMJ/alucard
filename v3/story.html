@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="../resources/css/reset.css">
+    <link rel="stylesheet" href="../resources/css/font.css">
+    <script type="text/javascript" src="../resources/js/Alucard.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+</head>
+
+<body>
+	<script type="text/javascript" src="../resources/js/slick.min.js"></script>
+  <script type="text/javascript">
+	  Alucard(function() {
+	      //LAYOUT_MANAGER.init();
+          DATA_MANAGER.init({
+              key: '',
+              callback: function(data){
+                  LAYOUT_MANAGER.init(data);
+              }
+          });
+
+          Alucard.Css('.inner').S('position', 'relative', 'width', 1080, 'margin', '0 auto');
+          Alucard.Css('.hidden').S('display', 'block', 'overflow', 'hidden', 'width', 0, 'height', 0, 'text-indent', '-9999em');
+      },
+      'DATA_MANAGER.js',
+      'LAYOUT_MANAGER.js',
+      'WRAP.js',
+      'HEADER.js',
+      'GNB.js',
+      'UI.js',
+      'LIST.js',
+      'CONTAINER.js',
+      'VISUAL_SLIDE.js',
+      'FOOTER.js');
+	 	
+  </script>
+</body>
+
+</html>
