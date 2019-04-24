@@ -159,6 +159,10 @@ var LIST;
                                     'color', '#000',
                                     'line-height', '1.46'
                                 ),
+                                'click', function(e){
+                                    e.nativeEvent.preventDefault();
+                                    if(option.clickCallback !== undefined) option.clickCallback(e);
+                                },
                                 'display', 'block',
                                 'width', '100%',
                                 'height', '100%',
