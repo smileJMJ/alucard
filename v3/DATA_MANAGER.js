@@ -10,7 +10,7 @@ var DATA_MANAGER;
               var data = (JSON.parse(v)[opt.key] === undefined) ? JSON.parse(v) : JSON.parse(v)[opt.key];
 
               opt.callback(data);
-          }, 'storyData.json');
+          }, 'story.json');
       }
     };
 })();
