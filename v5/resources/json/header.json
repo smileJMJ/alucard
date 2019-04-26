@@ -1,0 +1,26 @@
+{
+  "logo":{
+    "type": "img",
+    "img": "../resources/img/inAIR_black.svg",
+    "text": "inAIR",
+    "url": "/"
+  },
+  "gnb":{
+    "type": "fulldown",
+    "mobile": true,
+    "accessibility": false,
+    "menu": [
+      {"name": "inAIR 소개", "url": "https://www.midashri.com/intro/ai"},
+      {"name": "성공스토리", "url": "https://www.midashri.com/story/list"},
+      {"name": "체험하기", "url": "https://www.midashri.com/experience"},
+      {"name": "문의하기", "url": "https://www.midashri.com/contact/contact"},
+      {"name": "HR 세미나", "url": "https://www.midashri.com/seminar/list"},
+      {"name": "HRev 블로그", "url": "https://www.midashri.com/blog"}
+    ]
+  },
+  "etc": {
+    "type": "button",
+    "text": "inAIR 문의하기",
+    "url": "/consultant/contact"
+  }
+}

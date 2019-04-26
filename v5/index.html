@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="../resources/css/reset.css">
+    <link rel="stylesheet" href="../resources/css/font.css">
+    <script type="text/javascript" src="../resources/js/Alucard.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+    <style type="text/css">
+        .inner {position:relative; width:1080px; margin:0 auto;}
+        .hidden {}
+    </style>
+</head>
+
+<body>
+	<script type="text/javascript" src="../resources/js/slick.min.js"></script>
+  <script type="text/javascript">
+	  Alucard(function() {
+	      //ROUTER.init('PAGE_STORY');
+          PAGE_STORY.init(true);                    //  처음 실행할 때 param: true
+      },
+          'resources/js/core/ROUTER.js',
+          'resources/js/CONST.js',
+          'resources/js/layout/LAYOUT.js',
+          'resources/js/layout/header/HEADER2.js',
+          'resources/js/layout/header/GNB.js',
+          'resources/js/contents/PAGE_STORY.js',
+          'resources/js/contents/PAGE_STORY_VIEW.js',
+          'resources/js/util/VISUAL_SLIDE.js',
+          'resources/js/util/LIST.js',
+          'resources/js/util/UI.js'
+      );
+	 	
+  </script>
+</body>
+
+</html>
