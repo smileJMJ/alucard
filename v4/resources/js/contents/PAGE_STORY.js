@@ -43,8 +43,12 @@ var PAGE_STORY;
                             hashtag: true,
                             clickCallback: function(e){
                                 //ROUTER.init('PAGE_STORY_VIEW');
-                                PAGE_STORY.destroy();
-                                PAGE_STORY_VIEW.init(e.target.dataset.url);
+                                if(e.target.dataset.url !== undefined){
+                                    PAGE_STORY.destroy();
+                                    PAGE_STORY_VIEW.init(e.target.dataset.url);
+                                }else{
+                                    alert('링크를 확인해주세요. ', e.target.dataset.url);
+                                }
                             }
                         })
                     ),
