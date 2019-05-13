@@ -13,7 +13,7 @@ https://smilejmj.github.io/study/v5/index.html
   - 콘텐츠 페이지는 PAGE_STORY(리스트)와 PAGE_STORY_VIEW(뷰)를 만들고, PAGE_STORY에서 각 리스트 클릭 시 뷰페이지로 전환되도록 구현함
   - LIST 등 옵션 값을 설정할 수 있도록 작업.  
 - v5
-  - window.pushState 이용하여 ROUTER 구현 (아직 미완, url은 변경되나 새로고침 되지 않고 페이지 바뀌도록)
+  - window.pushState & window.onpopstate 이용하여 ROUTER 구현 (아직 미완, url은 변경되나 새로고침 되지 않고 페이지 바뀌도록)
   - 페이지 init/destroy 더 생각해보기
   - v4에서 어떻게 바꿔볼지 고민해보기
 
