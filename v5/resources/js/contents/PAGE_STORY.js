@@ -66,9 +66,11 @@ var PAGE_STORY;
     };
 
     PAGE_STORY = {
-        init: function(first){
-            /*var header;
+        init: function(){
+            var header;
             var contents;
+
+            if(Alucard.query('#wrap') !== null) Alucard.query('#wrap').dom.remove();
 
             header = HEADER.init();
             contents = makeContents();
@@ -78,17 +80,17 @@ var PAGE_STORY;
                 '>', header,
                 '>', contents,
                 '<', 'body'
-            );*/
+            );
 
-            var contents;
+            /*var contents;
             contents = makeContents();
 
             LAYOUT.init({
                 container: contents
-            });
+            });*/
         },
         destroy: function(){
-            //HEADER.destroy();
+            HEADER.destroy();
             container.remove();
             VISUAL_SLIDE.destroy();
             LIST.destroy();

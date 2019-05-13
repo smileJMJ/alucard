@@ -26,7 +26,7 @@ var PAGE_STORY_VIEW;
         );
 
         dir = '/story/view/';
-        idx = Number(url.split(dir)[1]);
+        idx = url !== undefined ? Number(url.split(dir)[1]) : 0;
         Alucard.ajaxGet(function(d){
             data = JSON.parse(d)['story_view'];
             data.forEach(function(v, i){
@@ -52,8 +52,9 @@ var PAGE_STORY_VIEW;
         init: function(url){
             var contents;
 
-            contents = makeContents(url);
+            if(Alucard.query('#wrap') !== null) Alucard.query('#wrap').dom.remove();
 
+            contents = makeContents(url);
             Alucard.Dom('div').S(
                 '@id', 'wrap',
                 '>', contents,
