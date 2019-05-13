@@ -4,7 +4,7 @@
 
 var ROUTER;
 (function(){
-    var hostname = 'http://localhost:63342/study/v5';
+    var hostname = '/study/v5';
     var status = {};
 
     ROUTER = {
