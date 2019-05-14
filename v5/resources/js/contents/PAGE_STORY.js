@@ -70,8 +70,6 @@ var PAGE_STORY;
             var header;
             var contents;
 
-            if(Alucard.query('#wrap') !== null) Alucard.query('#wrap').dom.remove();
-
             header = HEADER.init();
             contents = makeContents();
 
@@ -90,10 +88,12 @@ var PAGE_STORY;
             });*/
         },
         destroy: function(){
-            HEADER.destroy();
+            /*HEADER.destroy();
             container.remove();
             VISUAL_SLIDE.destroy();
-            LIST.destroy();
+            LIST.destroy();*/
+            console.log('page_stroy destroy');
+            if(Alucard.query('#wrap') !== null) Alucard.query('#wrap').dom.remove();
         }
     };
 })();

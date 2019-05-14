@@ -4,7 +4,6 @@ var MAIN;
 
     MAIN = {
         init: function(){
-            if(Alucard.query('#wrap') !== null) Alucard.query('#wrap').dom.remove();
             wrap = Alucard.Dom('div').S(
                 '@id', 'wrap',
                 '<', 'body'
@@ -13,7 +12,7 @@ var MAIN;
             Alucard.Dom('button').S(
                 '@html', 'story list로 이동',
                 'click', function(){
-                    ROUTER.init('PAGE_STORY');
+                    ROUTER.go('PAGE_STORY');
                 },
                 'width', 100,
                 'height', 20,
@@ -24,7 +23,7 @@ var MAIN;
             Alucard.Dom('button').S(
                 '@html', 'story view로 이동',
                 'click', function(){
-                    ROUTER.init('PAGE_STORY_VIEW');
+                    ROUTER.go('PAGE_STORY_VIEW');
                 },
                 'width', 100,
                 'height', 20,
@@ -35,7 +34,7 @@ var MAIN;
             Alucard.Dom('button').S(
                 '@html', 'contact로 이동',
                 'click', function(){
-                    ROUTER.init('PAGE_CONTACT');
+                    ROUTER.go('PAGE_CONTACT');
                 },
                 'width', 100,
                 'height', 20,
@@ -44,10 +43,8 @@ var MAIN;
             );
         },
         destroy: function(){
-            var body = Alucard.query('body').dom;
-            var wrap = Alucard.query('#wrap').dom;
-
-            body.removeChild(wrap);
+            console.log('main_destroy')
+            if(wrap !== undefined) wrap.dom.remove();
         }
     };
 })();
