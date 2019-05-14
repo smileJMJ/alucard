@@ -6,12 +6,10 @@ var ROUTER;
 (function(){
     var hostname = '/study/v5';
     var status = {};
+    var popState;
 
     ROUTER = {
-        init: function(page){
-            var self;
-            self = this;
-
+        getStatus: function(page){
             switch(page){
                 case ('MAIN' || '' || undefined):
                     status = {
@@ -19,8 +17,6 @@ var ROUTER;
                         url: '/index.html',
                         tit: '메인',
                         cb: function(){
-                            /*if(arguments.length > 0) MAIN.destroy();
-                            else MAIN.init();*/
                             MAIN.init();
                         }
                     };
@@ -54,8 +50,11 @@ var ROUTER;
                         url: '/contact',
                         tit: '문의하기',
                         cb: function(){
-                            if(Alucard.query('#wrap') !== null) Alucard.query('#wrap').dom.remove();
-                            document.write('PAGE_CONTACT');
+                            var body = Alucard.query('body').dom;
+                            var wrap = Alucard.query('#wrap').dom;
+                            console.log(wrap)
+                            if(wrap.length > 0) body.removeChild(wrap);
+
                         }
                     };
                     break;
@@ -63,18 +62,24 @@ var ROUTER;
                 default:
                     break;
             }
+        },
+        init: function(page){
+            var self = this;
 
+            self.getStatus(page);
             if(status.url !== undefined){
-                window.onpopstate = function(e){
-                    //status = JSON.parse(sessionStorage.getItem(e.state));
-                    ROUTER.init(e.state);
-                    status.cb('destroy');
-                    console.log(status)
-                };
+                popState = false;
 
-                //sessionStorage.setItem(status.name, JSON.stringify(status));
-                history.pushState(status.name, status.tit, hostname + status.url);
-                status.cb();
+                window.onpopstate = function(e){
+                    popState = true;
+                    self.getStatus(e.state);
+                    status.cb();
+                }
+
+                if(!popState){
+                    history.pushState(status.name, status.tit, hostname + status.url);
+                    status.cb();
+                }
             }
         }
     };
