@@ -1,17 +1,17 @@
 {
   "visual_slide": [
-    {"html": "SPC, 단순 업무는 줄이고<strong>인재에 집중하고 있습니다</strong>", "img":"../resources/img/visual1.jpg", "url":"#"},
-    {"html": "쌍용자동차, 1만명의 지원자<strong>단 2명의 담당자가 관리해요</strong>", "img":"../resources/img/visual2.jpg", "url":"#"}
+    {"html": "SPC, 단순 업무는 줄이고<strong>인재에 집중하고 있습니다</strong>", "img":"/study/resources/img/visual1.jpg", "url":"#"},
+    {"html": "쌍용자동차, 1만명의 지원자<strong>단 2명의 담당자가 관리해요</strong>", "img":"/study/resources/img/visual2.jpg", "url":"#"}
   ],
   "select1": {"id": "filter1", "val": ["업종", "제조", "제약", "유통", "기관"]},
   "select2": {"id": "filter2", "val": ["기업 구분", "대기업/계열사", "중견/중소기업", "공기업/공공기관", "외국계"]},
   "search": {"keyword": "name", "placeholder": "기업명을 검색해보세요"},
   "filterList": [
-    {"name": "셀트리온", "tit": "셀트리온헬스케어가<br/>잘 나가는 이유!", "url":"0", "thumb": "../resources/img/thumb1.jpg", "logo": "../resources/img/logo_celltrion.png", "filter1": "제조", "filter2": "대기업/계열사"},
-    {"name": "SPC", "tit": "대규모 그룹 공채<br/>inAIR 하나면 충분해요", "url":"1", "thumb": "../resources/img/thumb2.jpg", "logo": "../resources/img/logo_spc.png", "filter1": "제약", "filter2": "외국계"},
-    {"name": "셀트리온", "tit": "셀트리온헬스케어가<br/>잘 나가는 이유!", "url":"2", "thumb": "../resources/img/thumb1.jpg", "logo": "../resources/img/logo_celltrion.png", "filter1": "유통", "filter2": "중견/중소기업"},
-    {"name": "SPC", "tit": "대규모 그룹 공채<br/>inAIR 하나면 충분해요", "url":"3", "thumb": "../resources/img/thumb2.jpg", "logo": "../resources/img/logo_spc.png", "filter1": "기관", "filter2": "공기업/공공기관"},
-    {"name": "셀트리온", "tit": "셀트리온헬스케어가<br/>잘 나가는 이유!", "url":"4", "thumb": "../resources/img/thumb1.jpg", "logo": "../resources/img/logo_celltrion.png", "filter1": "제조", "filter2": "외국계"},
-    {"name": "SPC", "tit": "대규모 그룹 공채<br/>inAIR 하나면 충분해요", "url":"5", "thumb": "../resources/img/thumb2.jpg", "logo": "../resources/img/logo_spc.png", "filter1": "제약", "filter2": "중견/중소기업"}
+    {"name": "셀트리온", "tit": "셀트리온헬스케어가<br/>잘 나가는 이유!", "url":"0", "thumb": "/study/resources/img/thumb1.jpg", "logo": "/study/resources/img/logo_celltrion.png", "filter1": "제조", "filter2": "대기업/계열사"},
+    {"name": "SPC", "tit": "대규모 그룹 공채<br/>inAIR 하나면 충분해요", "url":"1", "thumb": "/study/resources/img/thumb2.jpg", "logo": "/study/resources/img/logo_spc.png", "filter1": "제약", "filter2": "외국계"},
+    {"name": "셀트리온", "tit": "셀트리온헬스케어가<br/>잘 나가는 이유!", "url":"2", "thumb": "/study/resources/img/thumb1.jpg", "logo": "/study/resources/img/logo_celltrion.png", "filter1": "유통", "filter2": "중견/중소기업"},
+    {"name": "SPC", "tit": "대규모 그룹 공채<br/>inAIR 하나면 충분해요", "url":"3", "thumb": "/study/resources/img/thumb2.jpg", "logo": "/study/resources/img/logo_spc.png", "filter1": "기관", "filter2": "공기업/공공기관"},
+    {"name": "셀트리온", "tit": "셀트리온헬스케어가<br/>잘 나가는 이유!", "url":"4", "thumb": "/study/resources/img/thumb1.jpg", "logo": "/study/resources/img/logo_celltrion.png", "filter1": "제조", "filter2": "외국계"},
+    {"name": "SPC", "tit": "대규모 그룹 공채<br/>inAIR 하나면 충분해요", "url":"5", "thumb": "/study/resources/img/thumb2.jpg", "logo": "/study/resources/img/logo_spc.png", "filter1": "제약", "filter2": "중견/중소기업"}
   ]
 }

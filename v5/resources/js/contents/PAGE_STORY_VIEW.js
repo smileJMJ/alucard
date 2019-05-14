@@ -52,8 +52,6 @@ var PAGE_STORY_VIEW;
         init: function(url){
             var contents;
 
-            if(Alucard.query('#wrap') !== null) Alucard.query('#wrap').dom.remove();
-
             contents = makeContents(url);
             Alucard.Dom('div').S(
                 '@id', 'wrap',
@@ -63,7 +61,8 @@ var PAGE_STORY_VIEW;
         },
         destroy:function(){
             //HEADER.destroy();
-            container.remove();
+            //container.remove();
+            if(Alucard.query('#wrap') !== null) Alucard.query('#wrap').dom.remove();
         }
     };
 })();
